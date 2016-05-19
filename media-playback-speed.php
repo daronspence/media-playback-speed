@@ -1,39 +1,44 @@
 <?php
 /**
  * Plugin Name: Media Playback Speed
- * Description: Appends playback buttons to the Audio Media Player
+ * Description: Appends playback buttons to the Audio Media Player.
  * Author: Daron Spence
+ * Version: 0.1
  */
 
-add_filter( 'wp_audio_shortcode', function( $html, $atts, $audio, $post_id, $library ){
-	
-	ob_start(); 
+add_action( 'wp_footer', function(){
 ?>
-		<script type="text/template" id="playback-buttons-<?php echo $post_id; ?>">
-			<button onclick="changePbRate(.5)">.5x</button>
-			<button onclick="changePbRate(1)">1x</button>
-			<button onclick="changePbRate(2)">2x</button>
-			<button onclick="changePbRate(4)">4x</button>
-		</script>
-		<script type="text/javascript">
-			var $buttons = document.getElementById("playback-buttons-<?php echo $post_id; ?>");
-			var $mediajs = $buttons.previousElementSibling;
-			$mediajs.insertAdjacentHTML('afterend', $buttons.innerHTML );
+	<script type="text/template" id="playback-buttons-template">
+		<div class="playback-speed-buttons-wrap" style="margin-top: 2em;">
+			<button onclick="MPSchangePbRate(0.5, this )">.5x</button>
+			<button onclick="MPSchangePbRate(1.0, this )">1x</button>
+			<button onclick="MPSchangePbRate(2.0, this )">2x</button>
+			<button onclick="MPSchangePbRate(4.0, this )">4x</button>
+		</div>
+	</script>
+	<script type="text/javascript">
+		(function($){
+			$(window).load( function(){
 
-			function changePbRate( rate ){
-				var els = document.getElementsByTagName( 'audio' );
-				for ( i = 0; i < els.length; i++ ){
-					els[i].playbackRate = rate;
+				var $buttons = $( $("#playback-buttons-template").html() );
+				var $els = $( 'audio.wp-audio-shortcode' );
+
+				for ( i = 0; i < $els.length; i++ ){
+					$buttons.find('button').attr('data-audio-el', $els[i].id );
+					$( $els[i] ).after( $buttons.clone() );
 				}
-			}
-		</script>
 
-<?php 
-	
-	$buttons = ob_get_clean();
+			});
+		})(jQuery);
 
-	$html .= $buttons;
+		function MPSchangePbRate( rate, el ){
+			
+			var $button = jQuery(el);
+			var audioTag = jQuery('#' + $button.attr('data-audio-el') )[0];
+				
+			audioTag.playbackRate = rate;
 
-	return $html;
-
-}, 10, 4 );
+		}
+	</script>
+<?php
+}, 1, 100 );
