@@ -6,6 +6,10 @@
  * Version: 0.1
  */
 
+add_action( 'wp_enqueue_scripts', function(){
+	wp_enqueue_script( 'jquery' );
+});
+
 add_action( 'wp_footer', function(){
 ?>
 	<script type="text/template" id="playback-buttons-template">
