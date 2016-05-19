@@ -37,9 +37,7 @@ add_action( 'wp_footer', function(){
 
 		function MPSchangePbRate( rate, el ){
 			
-			var $button = jQuery(el);
-			var audioTag = jQuery('#' + $button.attr('data-audio-el') )[0];
-				
+			var audioTag = jQuery('#' + jQuery( el ).attr('data-audio-el') )[0];
 			audioTag.playbackRate = rate;
 
 		}
