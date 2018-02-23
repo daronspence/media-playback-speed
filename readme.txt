@@ -4,7 +4,7 @@ Tags: frontend,media,streaming,aria,mediaelementjs,html5,video,audio,playback,sp
 Requires at least: 4.0
 Tested up to: 4.9.1
 Requires PHP: 5.6
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -25,6 +25,9 @@ Two hooks are provided within this plugin.
 
 * 'media-playback-speed-data' provides the default array containing arrays as items with `rate`, `title` and `label` entries, which set the playback rate, the title and aria-title for the buttons as well as adjust the button text.
 
+#### Theme & Front-end
+
+`.playback-rate-button.mejs-active` CSS-selector allows you to style the active speed (per-player)
 
 #### Feedback
 
@@ -32,3 +35,10 @@ Please feel free to [suggest](https://github.com/CODESIGN2/media-playback-speed/
 
 == Installation ==
 Download and extract the zip file or clone this repo to your WordPress plugins directory. Alternatively use the plugin directory to find and install this plugin.
+
+== Changelog ==
+= 1.0.1 =
+* Modified to enable showing active speed (requires JS to function)
+
+= 1.0.0 =
+* Initial submission to plugin-directory after button integration works, and re-factoring by Lewis Cowles

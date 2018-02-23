@@ -3,7 +3,7 @@
  * Plugin Name: Media Playback Speed
  * Description: Appends playback buttons to the Media Player.
  * Author: Daron Spence
- * Version: 1.0.0
+ * Version: 1.0.1
  */
 
 add_action( 'wp_enqueue_scripts', function(){
@@ -30,7 +30,7 @@ add_action( 'wp_footer', function(){
 		<?php if(apply_filters('media-playback-speed-generate-controls', true)): ?>
 			<?php foreach(apply_filters('media-playback-speed-data', $defaults) as $item): ?>
 			<div class="mejs-button blank-button">
-				<button type="button" class="playback-rate-button" data-value="<?php echo esc_attr($item['rate']); ?>" title="<?php echo esc_attr($item['title']); ?>" aria-label="<?php echo esc_attr($item['title']); ?>" tabindex="0"><?php echo esc_html($item['label']); ?></button>
+				<button type="button" class="playback-rate-button<?php echo (($item['rate'] == 1) ? ' mejs-active' : ''); ?>" data-value="<?php echo esc_attr($item['rate']); ?>" title="<?php echo esc_attr($item['title']); ?>" aria-label="<?php echo esc_attr($item['title']); ?>" tabindex="0"><?php echo esc_html($item['label']); ?></button>
 			</div>
 			<?php endforeach; ?>
 		<?php endif; ?>
@@ -55,6 +55,9 @@ add_action( 'wp_footer', function(){
 							mediaTag = $('#'+btnEl.attr('aria-controls'))[0],
 							rate = btnEl.attr('data-value');
 					mediaTag.setPlaybackRate(rate);
+
+					$(this).closest('.mejs-container').find('.playback-rate-button').removeClass('mejs-active');
+	        $(this).addClass('mejs-active');
 				});
 
 			});
