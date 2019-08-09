@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: Media Playback Speed
- * Description: Appends playback buttons to the Media Player.
- * Author: Daron Spence
- * Version: 1.0.1
+ * Description: Appends playback buttons to the Media Player. Updated original by Daron Spence.
+ * Author: LewisCowles
+ * Version: 1.0.2
  */
 
 add_action( 'wp_enqueue_scripts', function(){

@@ -1,10 +1,10 @@
 === Media Playback Speed ===
 Contributors: LewisCowles,daronspence
-Tags: frontend,media,streaming,aria,mediaelementjs,html5,video,audio,playback,speed
+Tags: frontend,media,streaming,aria,mediaelementjs,html5,video,audio,playback,speed,cd2,lewiscowles
 Requires at least: 4.0
-Tested up to: 4.9.1
+Tested up to: 5.2.2
 Requires PHP: 5.6
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -37,6 +37,9 @@ Please feel free to [suggest](https://github.com/CODESIGN2/media-playback-speed/
 Download and extract the zip file or clone this repo to your WordPress plugins directory. Alternatively use the plugin directory to find and install this plugin.
 
 == Changelog ==
+= 1.0.2 =
+* Verified working with 5.2.2 (requires old-style shortcode media embedding)
+
 = 1.0.1 =
 * Modified to enable showing active speed (requires JS to function)
 
