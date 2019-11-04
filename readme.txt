@@ -4,7 +4,7 @@ Tags: frontend,media,streaming,aria,mediaelementjs,html5,video,audio,playback,sp
 Requires at least: 4.0
 Tested up to: 5.2.2
 Requires PHP: 5.6
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 

@@ -3,7 +3,7 @@
  * Plugin Name: Media Playback Speed
  * Description: Appends playback buttons to the Media Player. Updated original by Daron Spence.
  * Author: LewisCowles
- * Version: 1.0.2
+ * Version: 1.0.3
  */
 
 add_action( 'wp_enqueue_scripts', function(){
@@ -43,11 +43,16 @@ add_action( 'wp_footer', function(){
 				var $els = $( '.mejs-container' );
 
 				for ( i = 0; i < $els.length; i++ ){
-					var audioTag = $( $els[i] ).find('audio,video')[0];
-					$buttons.find('.playback-rate-button').attr('aria-controls', audioTag.id );
+					var mediaTag = $( $els[i] ).find('audio,video')[0];
+					$buttons.find('.playback-rate-button').attr('aria-controls', mediaTag.id );
 					var $controls = $( $els[i] ).find('.mejs-controls');
 					if($controls.length > 0) {
 						$controls.find('.mejs-duration-container').after( $buttons.clone() );
+						$(mediaTag).on('loadedmetadata', function() {
+							var activeSpeed = $(this).closest('.wp-playlist').find('.mejs-container .playback-rate-button.mejs-active');
+								rate = activeSpeed.attr('data-value');
+							$(this)[0].setPlaybackRate(rate);
+						});
 					}
 				}
 				$('body').on('click', '.playback-rate-button', function() {
@@ -57,9 +62,8 @@ add_action( 'wp_footer', function(){
 					mediaTag.setPlaybackRate(rate);
 
 					$(this).closest('.mejs-container').find('.playback-rate-button').removeClass('mejs-active');
-	        $(this).addClass('mejs-active');
+					$(this).addClass('mejs-active');
 				});
-
 			});
 		})(jQuery);
 	</script>
