@@ -55,7 +55,8 @@
         if(!e.target || !e.target.classList.contains('playback-rate-button')) { return; }
 
         // We set aria attributes informing which DOMElement to control
-        var mediaTag = document.querySelector(`#${e.target.getAttribute('aria-controls')}`),
+        var targetId = e.target.getAttribute('aria-controls')
+            mediaTag = document.getElementById(targetId),
             rate = e.target.dataset.value;
 
         // Guard against failing matchers. The DOM must be fulfilled, but this also means this part maybe doesn't need media-element-js
