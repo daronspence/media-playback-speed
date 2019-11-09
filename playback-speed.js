@@ -86,10 +86,10 @@
         }
 
         var mediaPlaybackContainer;
-        if(mediaTag) { mediaTag.closest('.mejs-container'); }
+        if(mediaTag) { mediaPlaybackContainer = mediaTag.closest('.mejs-container'); }
 
         // This allows use outside of WordPress for this
-        if(!mediaPlaybackContainer) { mediaPlaybackContainer = document.body; }
+        if(!mediaTag || !mediaPlaybackContainer) { mediaPlaybackContainer = mediaTag || document.body; }
 
         // Clear all active playback rate buttons for this element of the active class
         [].slice.call(
