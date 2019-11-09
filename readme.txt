@@ -1,17 +1,19 @@
 === Media Playback Speed ===
 Contributors: LewisCowles,daronspence
-Tags: frontend,media,streaming,aria,mediaelementjs,html5,video,audio,playback,speed,cd2,lewiscowles
+Tags: frontend,media,streaming,aria,mediaelementjs,html5,video,audio,playback,speed,cd2,lewiscowles,codesign2,shortcode,playlist
 Requires at least: 4.0
-Tested up to: 5.2.2
+Tested up to: 5.2.4
 Requires PHP: 5.6
-Stable tag: 1.0.7
+Stable tag: 1.1.1
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Add speed controls to audio and video hosted from your WordPress blog.
 
 == Description ==
-This short handy plugin will add playback buttons to your audio and video elements added via the built-in wordpress shortcodes for media using mediaelement.js. Each set of buttons is configured for it's corresponding element on the page, so you can adjust the speed of multiple files independantly.
+This short, handy plugin will add playback buttons to your audio, video & playlist elements added via the built-in WordPress shortcodes for media using mediaelement.js.
+
+Each set of buttons is configured for it's corresponding element on the page, so you can adjust the speed of multiple files independently.
 
 There is currently no persistence implemented in this plugin. It just scratches an itch to be able to broadly adjust media playback speeds using the HTML api.
 
@@ -29,6 +31,18 @@ Two hooks are provided within this plugin.
 
 `.playback-rate-button.mejs-active` CSS-selector allows you to style the active speed (per-player)
 
+#### Troubleshooting
+
+This works with the traditional `audio`, `video` and `playlist` shortcodes so long as WordPress uses the JavaScript player.
+
+With the latest 1.1.1 release this also works for HTML5 audio and video too, however you will need to implement your own controls which have the `playback-rate-button` class and follow the patterns of this.
+
+HTML5 raw controls do not have a playlist the author is aware of, and they use global state, so playback rate is per-page.
+
+There is currently no history as part of this plugin, however a sister plugin could be authored and hooks added to it to store playback rate.
+
+Please ensure that you have no broken javascript, or wrap all functions in `(function() { // do things })()` blocks to ensure nothing interferes with this plugin. This plugin does this so that it should not interfere with your site, even in browsers and pages which do not support this plugin.
+
 #### Feedback
 
 Please feel free to [suggest](https://github.com/CODESIGN2/media-playback-speed/issues) improvements, report conflicts, and/or make suggestions for integration hooks etc.
@@ -37,6 +51,9 @@ Please feel free to [suggest](https://github.com/CODESIGN2/media-playback-speed/
 Download and extract the zip file or clone this repo to your WordPress plugins directory. Alternatively use the plugin directory to find and install this plugin.
 
 == Changelog ==
+= 1.1.1 =
+* minor rewrite adding comments and building on the Vanilla JS 1.0.7 works
+
 = 1.0.7 =
 * guard to prevent errors
 
