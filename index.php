@@ -3,7 +3,7 @@
  * Plugin Name: Media Playback Speed
  * Description: Appends playback buttons to the Media Player. Updated original by Daron Spence.
  * Author: LewisCowles
- * Version: 1.0.5
+ * Version: 1.0.6
  */
 
 add_action( 'wp_footer', function(){
@@ -33,7 +33,7 @@ add_action( 'wp_footer', function(){
 	</script>
 	<script type="text/javascript">
 		(function() {
-			document.addEventListener("DOMContentLoaded", function() {
+			window.addEventListener("load", function() {
 				var buttons = document.createRange().createContextualFragment(
 					document.querySelector("#playback-buttons-template").innerHTML
 				);

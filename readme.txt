@@ -4,7 +4,7 @@ Tags: frontend,media,streaming,aria,mediaelementjs,html5,video,audio,playback,sp
 Requires at least: 4.0
 Tested up to: 5.2.2
 Requires PHP: 5.6
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -37,6 +37,18 @@ Please feel free to [suggest](https://github.com/CODESIGN2/media-playback-speed/
 Download and extract the zip file or clone this repo to your WordPress plugins directory. Alternatively use the plugin directory to find and install this plugin.
 
 == Changelog ==
+= 1.0.6 =
+* change of DOM event
+
+= 1.0.5 =
+* using DOM events in the absence of jQuery
+
+= 1.0.4 =
+* No more jQuery
+
+= 1.0.3 =
+* Addition of playlist support (still requires old WP shortcode embedding)
+
 = 1.0.2 =
 * Verified working with 5.2.2 (requires old-style shortcode media embedding)
 
