@@ -4,7 +4,7 @@ Tags: frontend,media,streaming,aria,mediaelementjs,html5,video,audio,playback,sp
 Requires at least: 4.0
 Tested up to: 5.2.4
 Requires PHP: 5.6
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -29,7 +29,13 @@ Two hooks are provided within this plugin.
 
 #### Theme & Front-end
 
-`.playback-rate-button.mejs-active` CSS-selector allows you to style the active speed (per-player)
+The `.playback-rate-button.mejs-active` and/or `.playback-rate-button.active-playback-rate` CSS-selectors allow you to style the active speed (per-player).
+
+Initially mejs-active class was added in order to create media-playback-js compatible / familiar class names.
+
+Now that Gutenberg does not add these, it makes sense to for-now add two sets of classes.
+
+The `.playback-rate-button.mejs-active` selector will be deprecated in version 2.
 
 #### Troubleshooting
 
@@ -51,6 +57,9 @@ Please feel free to [suggest](https://github.com/CODESIGN2/media-playback-speed/
 Download and extract the zip file or clone this repo to your WordPress plugins directory. Alternatively use the plugin directory to find and install this plugin.
 
 == Changelog ==
+= 1.1.4 =
+* Non-mediaelement JS fixes
+
 = 1.1.3 =
 * IE 11 fixes.
 

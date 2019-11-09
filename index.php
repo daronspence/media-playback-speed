@@ -3,7 +3,7 @@
  * Plugin Name: Media Playback Speed
  * Description: Appends playback buttons to the Audio Player, Video Player & PLaylist shortcodes. Based on original by Daron Spence.
  * Author: LewisCowles
- * Version: 1.1.3
+ * Version: 1.1.4
  */
 
 add_action( 'wp_enqueue_scripts', function() {
@@ -11,7 +11,7 @@ add_action( 'wp_enqueue_scripts', function() {
 		'cd2-media-playback-speed-js',
 		plugins_url( 'playback-speed.js', __FILE__ ),
 		[],
-		'1.1.3',
+		'1.1.4',
 		true
 	);
 }, 1, 100);
@@ -36,7 +36,7 @@ add_action( 'wp_footer', function(){
 		<?php if(apply_filters('media-playback-speed-generate-controls', true)): ?>
 			<?php foreach(apply_filters('media-playback-speed-data', $defaults) as $item): ?>
 			<div class="mejs-button blank-button">
-				<button type="button" class="playback-rate-button<?php echo (($item['rate'] == 1) ? ' mejs-active' : ''); ?>" data-value="<?php echo esc_attr($item['rate']); ?>" title="<?php echo esc_attr($item['title']); ?>" aria-label="<?php echo esc_attr($item['title']); ?>" tabindex="0"><?php echo esc_html($item['label']); ?></button>
+				<button type="button" class="playback-rate-button<?php echo (($item['rate'] == 1) ? ' mejs-active active-playback-rate' : ''); ?>" data-value="<?php echo esc_attr($item['rate']); ?>" title="<?php echo esc_attr($item['title']); ?>" aria-label="<?php echo esc_attr($item['title']); ?>" tabindex="0"><?php echo esc_html($item['label']); ?></button>
 			</div>
 			<?php endforeach; ?>
 		<?php endif; ?>

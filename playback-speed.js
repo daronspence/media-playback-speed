@@ -27,23 +27,33 @@
                 if (!hasSpeedControls) {
                     // insertAfter container
                     container.parentNode.insertBefore(buttons.cloneNode(true), container.nextSibling);
-
-                    // when media is loaded persist the playback speed currently selected
-                    mediaTag.addEventListener('loadedmetadata', function(e) {
-                        var playlist = e.target.closest('.wp-playlist');
-                        if(playlist) {
-                            var activeSpeed = playlist.querySelector('.mejs-container .playback-rate-button.mejs-active'),
-                                rate = activeSpeed.dataset.value;
-
-                            // Guard against failing matchers. The DOM must be fulfilled, but this also means this part maybe doesn't need media-element-js
-                            if(!rate) { return; }
-
-                            // This is actually the magic. It's basically a more complex document.querySelector('video, audio').setPlaybackRate
-                            e.target.setPlaybackRate(rate);
-                        }
-                    });
                 }
             }
+        });
+    });
+    
+    [].slice.call( document.querySelectorAll( 'audio,video' ) ).forEach( function(elem) {
+        // when media is loaded persist the playback speed currently selected
+        elem.addEventListener('loadedmetadata', function(e) {
+            var playlist = e.target.closest('.wp-playlist');
+            var activeSpeed, rate;
+            if(playlist) {
+                // WordPress Playlist state restore selected speed
+                activeSpeed = playlist.querySelector('.mejs-container .playback-rate-button.mejs-active');
+                rate = activeSpeed.dataset.value;
+            } else {
+                // Any media-element, getting the first
+                activeSpeed = document.querySelector('.playback-rate-button.mejs-active, .playback-rate-button.active-playback-rate');
+                if(activeSpeed) {
+                    rate = activeSpeed.dataset.value;
+                }
+            }
+
+            // Guard against failing matchers. The DOM must be fulfilled, but this also means this part maybe doesn't need media-element-js
+            if(!rate) { return; }
+
+            // This is actually the magic. It's basically a more complex document.querySelector('video, audio').playbackRate
+            e.target.playbackRate = rate;
         });
     });
 
@@ -56,16 +66,27 @@
 
         // We set aria attributes informing which DOMElement to control
         var targetId = e.target.getAttribute('aria-controls')
-            mediaTag = document.getElementById(targetId),
-            rate = e.target.dataset.value;
+            mediaTag = document.getElementById(targetId);
 
         // Guard against failing matchers. The DOM must be fulfilled, but this also means this part maybe doesn't need media-element-js
-        if(!mediaTag || !rate) { return; }
+        var rate = e.target.dataset.value;
 
-        // This is actually the magic. It's basically a more complex document.querySelector('video, audio').setPlaybackRate
-        mediaTag.setPlaybackRate(rate);
+        // Guard against failing matchers. The DOM must be fulfilled, but this also means this part maybe doesn't need media-element-js
+        if(!rate) { return; }
 
-        var mediaPlaybackContainer = mediaTag.closest('.mejs-container');
+        // This is actually the magic. It's basically a more complex document.querySelector('video, audio').playbackRate
+        if(mediaTag) {
+            mediaTag.playbackRate = rate;
+        } else {
+            [].slice.call(
+                document.querySelectorAll('audio, video')
+            ).forEach(function(elem){
+                elem.playbackRate = rate;
+            });
+        }
+
+        var mediaPlaybackContainer;
+        if(mediaTag) { mediaTag.closest('.mejs-container'); }
 
         // This allows use outside of WordPress for this
         if(!mediaPlaybackContainer) { mediaPlaybackContainer = document.body; }
