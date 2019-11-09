@@ -3,7 +3,7 @@
  * Plugin Name: Media Playback Speed
  * Description: Appends playback buttons to the Media Player. Updated original by Daron Spence.
  * Author: LewisCowles
- * Version: 1.0.6
+ * Version: 1.0.7
  */
 
 add_action( 'wp_footer', function(){
@@ -52,9 +52,12 @@ add_action( 'wp_footer', function(){
 						container.parentNode.insertBefore(buttons.cloneNode(true), container.nextSibling);
 
 						mediaTag.addEventListener('loadedmetadata', function(e) {
-							var activeSpeed = e.target.closest('.wp-playlist').querySelector('.mejs-container .playback-rate-button.mejs-active');
-								rate = activeSpeed.dataset.value;
-							e.target.setPlaybackRate(rate);
+							var playlist = e.target.closest('.wp-playlist');
+							if(playlist) {
+								var activeSpeed = playlist.querySelector('.mejs-container .playback-rate-button.mejs-active'),
+									rate = activeSpeed.dataset.value;
+								e.target.setPlaybackRate(rate);
+							}
 						});
 					}
 				});
